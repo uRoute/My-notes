@@ -1,0 +1,65 @@
+<section class="register">
+    <div class="container card my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="register-image">
+                    <img class="w-100" src="./assets/images/Sign up-rafiki.svg" alt="" srcset="">
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <div class="register-form  w-100">
+                    <!-- <p> {{registerForm.get('name')?.getError('required') |json}} </p> -->
+                    <form [formGroup]="registerForm" (ngSubmit)="register(registerForm)">
+
+                        <div class="py-2">
+                            <label for="name">Name:</label>
+                            <input formControlName="name" class="form-control" id="name" placeholder="ex:youssef" type="text">
+                            <div id="alert" class="my-2" *ngIf="registerForm.get('name')?.errors &&  registerForm.get('name')?.touched">
+                                <p *ngIf="registerForm.get('name')?.getError('required')" >Name is required</p>
+                                <p *ngIf="registerForm.get('name')?.getError('minlength')" >Name Must be at least 3 characters</p>
+                                <p *ngIf="registerForm.get('name')?.getError('maxlength')" >Name Must not be over 10 characters</p>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <label for="email">Email:</label>
+                            <input formControlName="email" class="form-control" id="email" placeholder="ex:example@example.com" type="email">
+                            <div id="alert" class="my-2" *ngIf="registerForm.get('email')?.errors &&  registerForm.get('email')?.touched">
+                                <p *ngIf="registerForm.get('email')?.getError('required')" >Email is required</p>
+                                <p *ngIf="registerForm.get('email')?.getError('email')" >Email in not from email type</p>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <label for="password">Password:</label>
+                            <input formControlName="password" class="form-control" id="password" placeholder="ex:Youssef123" type="password">
+                            <div id="alert" class="my-2" *ngIf="registerForm.get('password')?.errors &&  registerForm.get('password')?.touched">
+                                <p *ngIf="registerForm.get('password')?.getError('required')" >Password is required</p>
+                                <p *ngIf="registerForm.get('password')?.getError('pattern')" >Password must begin with UPPER case character, contain only numbers and must be form 8 to 20 length</p>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <label for="age">Age:</label>
+                            <input formControlName="age" class="form-control" id="age" placeholder="ex:27" type="number">
+                            <div id="alert" class="my-2" *ngIf="registerForm.get('age')?.errors &&  registerForm.get('age')?.touched">
+                                <p *ngIf="registerForm.get('age')?.getError('required')" >Age is required</p>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <label for="phone">Phone:</label>
+                            <input formControlName="phone" class="form-control" id="phone" placeholder="ex:01205803911" type="tel">
+                            <div id="alert" class="my-2" *ngIf="registerForm.get('phone')?.errors &&  registerForm.get('phone')?.touched">
+                                <p *ngIf="registerForm.get('phone')?.getError('required')">Phone is required</p>
+                                <p *ngIf="registerForm.get('phone')?.getError('pattern')">Phone must be and egyption phone number</p>
+                            </div>
+                        </div>
+                        <button [disabled]="registerForm.invalid" class="btn submit-button w-100"> <i *ngIf="loading" class="fas fa-spinner fa-spin"></i>Register</button>
+                    </form>
+                    <div *ngIf="emailExist" id="alert" class="bg-warning my-2 py-2 d-flex align-items-center justify-content-center flex-column">
+                        <p> {{emailExist}} </p>
+                        <a routerLink="/login" class="btn btn-outline-dark ">Try to Login</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
